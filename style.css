@@ -1,18 +1,21 @@
+/* --- BASE VARIABLES --- */
 :root {
-    --primary-color: #004d99; /* Adjust to Hebron school colors */
+    --primary-color: #004d99; /* Hebron school colors */
     --text-color: #333;
     --bg-color: #f4f4f9;
     --sidebar-width: 250px;
 }
 
+/* --- GLOBAL STYLES --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     display: flex;
     background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
-/* Sidebar Styling */
+/* --- SIDEBAR STYLING --- */
 .sidebar {
     width: var(--sidebar-width);
     height: 100vh;
@@ -20,11 +23,12 @@ body {
     color: white;
     position: fixed;
     padding-top: 20px;
+    z-index: 1000;
 }
 
 .sidebar-header {
     text-align: center;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #333;
     margin-bottom: 10px;
     padding-bottom: 10px;
 }
@@ -32,20 +36,6 @@ body {
 .nav-links {
     list-style: none;
     padding: 0;
-}
-
-.nav-links li a, .dropdown-btn {
-    padding: 15px 25px;
-    text-decoration: none;
-    color: #bdc3c7;
-    display: block;
-    width: 100%;
-    border: none;
-    background: none;
-    text-align: left;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
 .nav-links li a, .dropdown-btn {
@@ -62,39 +52,45 @@ body {
     transition: 0.3s;
     
     /* THE FIXES */
-    white-space: normal;       /* Allows text to wrap to the next line */
-    word-wrap: break-word;     /* Breaks long words if necessary */
-    line-height: 1.4;          /* Adds space between stacked lines for readability */
-    box-sizing: border-box;    /* Ensures padding doesn't push width past 100% */
+    white-space: normal;       /* Allows text to wrap */
+    word-wrap: break-word;     /* Breaks long words */
+    line-height: 1.4;
+    box-sizing: border-box;
 }
 
-/* Dropdown styling */
+.nav-links li a:hover, .dropdown-btn:hover {
+    background-color: #34495e;
+    color: white;
+}
+
+/* --- DROPDOWN STYLING --- */
 .dropdown-container {
-    display: none;
+    display: none; /* Controlled by script.js */
     background-color: #1a252f;
-    padding-left: 20px;
+    padding-left: 0;
 }
 
 .dropdown-container a {
     font-size: 14px;
-    padding: 10px 20px 10px 35px; /* Extra left padding to indent items */
+    padding: 10px 20px 10px 40px; /* Indented look */
     display: block;
     color: #bdc3c7;
     text-decoration: none;
-    
-    /* THE FIXES */
     white-space: normal;
     line-height: 1.3;
 }
+
 .dropdown-container a:hover {
     background-color: #34495e;
     color: white;
 }
-/* Content Area */
+
+/* --- MAIN CONTENT AREA --- */
 .content {
     margin-left: var(--sidebar-width);
     flex: 1;
     padding: 20px;
+    min-height: 100vh;
 }
 
 .top-bar {
@@ -103,6 +99,7 @@ body {
     padding-bottom: 20px;
 }
 
+/* --- SEARCH BAR --- */
 .search-container {
     position: relative;
 }
@@ -120,32 +117,28 @@ body {
     color: #888;
 }
 
-.hero {
+/* --- PAGE HEADERS (HERO) --- */
+.hero, .study-hero {
     background: white;
     padding: 60px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     text-align: center;
-}
-
-/* Study Page Specific Styling */
-.study-hero {
     position: relative;
-    padding: 80px 20px;
-    text-align: center;
-    background-color: white;
-    margin-bottom: 30px;
     overflow: hidden;
+    margin-bottom: 30px;
 }
 
+/* Watermark Logo Logic */
 .bg-logo {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    opacity: 0.1; /* Makes it a faint background watermark */
-    width: 300px;
+    opacity: 0.08; /* Very faint watermark */
+    width: 350px;
     z-index: 1;
+    pointer-events: none; /* User can't click the logo instead of text */
 }
 
 .study-hero h1 {
@@ -153,34 +146,36 @@ body {
     z-index: 2;
     font-size: 3rem;
     color: #333;
+    margin: 0;
 }
 
+/* --- STUDY SECTIONS (Side-by-Side) --- */
 .study-container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 .study-section {
     display: flex;
-    align-items: center;
+    align-items: stretch; /* Makes both sides same height */
     background: white;
     margin-bottom: 25px;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 25px;
+    border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    gap: 20px;
+    gap: 30px;
 }
 
 .image-placeholder {
-    flex: 0 0 300px; /* Fixed width for the image side */
-    height: 200px;
-    background-color: #ddd;
+    flex: 0 0 350px; /* Fixed width for images */
+    min-height: 200px;
+    background-color: #eeeeee;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
-    border: 2px dashed #bbb;
-    color: #777;
+    border-radius: 8px;
+    border: 2px dashed #ccc;
+    color: #999;
 }
 
 .text-box {
@@ -190,4 +185,20 @@ body {
 .text-box h2 {
     color: var(--primary-color);
     margin-top: 0;
+}
+
+.text-box p {
+    line-height: 1.6;
+    color: #555;
+}
+
+/* --- RESPONSIVE FIX --- */
+@media (max-width: 900px) {
+    .study-section {
+        flex-direction: column;
+    }
+    .image-placeholder {
+        flex: 0 0 auto;
+        width: 100%;
+    }
 }
