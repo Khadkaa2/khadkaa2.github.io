@@ -214,7 +214,6 @@ body {
 
 /* Specific heading color you requested */
 .section-title, .section-subtitle {
-    color: #79A6C2; 
     font-family: 'Georgia', serif; /* Matching the serif style in your image */
 }
 
